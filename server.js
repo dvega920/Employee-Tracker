@@ -10,6 +10,10 @@ const app = express();
 //configures the port server will listen to
 const PORT = process.env.PORT || 8080;
 
+//Need to prompt users via inquirer
+
+
+
 //creates the connection and stores in "connection" variable
 // const connection = mysql.createConnection({
 //     host: 'localhost',
@@ -32,7 +36,16 @@ app.get("/", (req, res) => {
 // connection.end();
 
 //server listening...
-app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`Server is listening on port ${PORT}`);
+// });
 
+inquirer.prompt({
+    type: 'list',
+    name: 'questions',
+    message: 'What do you want to do?',
+    choices: ['Add Employee', 'Remove Employee']
+})
+    .then((err, resp) => {
+        throw err;
+    });
