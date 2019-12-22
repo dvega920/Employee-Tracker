@@ -2,10 +2,10 @@
 
 const inquirer = require('inquirer');
 const mysql = require('mysql');
-const express = require('express');
+// const express = require('express');
 
 //express method stored in "app" variable.
-const app = express();
+// const app = express();
 
 //configures the port server will listen to
 const PORT = process.env.PORT || 8080;
@@ -23,9 +23,9 @@ const PORT = process.env.PORT || 8080;
 //     database: ''
 // })
 
-app.get("/", (req, res) => {
-    return res.send('You are connected!');
-})
+// app.get("/", (req, res) => {
+//     return res.send('You are connected!');
+// })
 
 //open the connection
 // connection.connect();
@@ -40,12 +40,21 @@ app.get("/", (req, res) => {
 //     console.log(`Server is listening on port ${PORT}`);
 // });
 
-inquirer.prompt({
-    type: 'list',
-    name: 'questions',
-    message: 'What do you want to do?',
-    choices: ['Add Employee', 'Remove Employee']
-})
-    .then((err, resp) => {
-        throw err;
-    });
+
+/* NEED TO FIX questions array. Cannot get arrows to work to select choices.
+*/
+const questions = {
+    type: "list",
+    name: "choices",
+    message: "What do you want to do?",
+    choices: [
+        {
+            allemployees: "View All employees"
+        },
+        { allemployeesdept: "View All employees by Department" },
+        "View All employees by Manager",
+        "Add Employee",
+        "Remove Employee"
+    ]
+};
+inquirer.prompt(questions);
