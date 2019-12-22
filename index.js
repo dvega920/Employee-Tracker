@@ -28,9 +28,52 @@ function start() {
         }
 
     ]).then(answer => {
-        if (answer.choice === "Add Employee") {
-            console.log("You selected Add Employee");
+        if (answer.choice === "Add Department") {
+            // console.log("You selected Add Employee");  Used to test functionality. replace with addDept();
         }
+        else if (answer.choice === "") {
+            // addDept()
+        }
+        else if (answer.choice === "") {
+            // addRole()
+        }
+        else if (answer.choice === "") {
+            // addEmployee()
+        }
+        else if (answer.choice === "") {
+            // viewAllDept()
+        }
+        else if (answer.choice === "") {
+            // viewDeptSalariesCombined()
+        }
+        else if (answer.choice === "") {
+            // viewAllRoles()
+        }
+        else if (answer.choice === "") {
+            // viewAllEmployees()
+        }
+        else if (answer.choice === "") {
+            // viewEmployeesByManager()
+        }
+        else if (answer.choice === "") {
+            // updateEmployeeRoles()
+        }
+        else if (answer.choice === "") {
+            // updateEmployeeManager()
+        }
+        else if (answer.choice === "") {
+            // deleteDept()
+        }
+        else if (answer.choice === "") {
+            // deleteRole()
+        }
+        else if (answer.choice === "") {
+            // deleteEmployee()
+        }
+        else if (answer.choice === "") {
+            // exit()
+        }
+
 
     })
 }
