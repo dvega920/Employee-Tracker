@@ -1,60 +1,77 @@
 //Require packages and assign to variables
-
 const inquirer = require('inquirer');
-const mysql = require('mysql');
-// const express = require('express');
+const util = require('util');
+// const cTable = require("console.table");
 
-//express method stored in "app" variable.
-// const app = express();
+start();
 
-//configures the port server will listen to
-const PORT = process.env.PORT || 8080;
-
-//Need to prompt users via inquirer
-
-
-
-//creates the connection and stores in "connection" variable
-// const connection = mysql.createConnection({
-//     host: 'localhost',
-//     port: 3306,
-//     user: 'root',
-//     password: 'dvega75579dv6380', //ask Kyle..."how do we hide this again"
-//     database: ''
-// })
-
-// app.get("/", (req, res) => {
-//     return res.send('You are connected!');
-// })
-
-//open the connection
-// connection.connect();
-
-
-
-//end the connection
-// connection.end();
-
-//server listening...
-// app.listen(PORT, () => {
-//     console.log(`Server is listening on port ${PORT}`);
-// });
-
-
-/* NEED TO FIX questions array. Cannot get arrows to work to select choices.
-*/
-const questions = {
-    type: "list",
-    name: "choices",
-    message: "What do you want to do?",
-    choices: [
+function start() {
+    const questions = inquirer.prompt([
         {
-            allemployees: "View All employees"
-        },
-        { allemployeesdept: "View All employees by Department" },
-        "View All employees by Manager",
-        "Add Employee",
-        "Remove Employee"
-    ]
-};
-inquirer.prompt(questions);
+            type: "list",
+            name: "choice",
+            message: "What do you want to do?",
+            choices: [
+                {
+                    name: "Add Department",
+                    value: "Add_Dept",
+                },
+                {
+                    name: "Add Role",
+                    value: "Add_Role"
+                },
+                {
+                    name: "Add Employee",
+                    value: "Add_Emp"
+                },
+                {
+                    name: "View All Department",
+                    value: "View_All_Dept"
+                },
+                {
+                    name: "View Department Salaries (Combined)",
+                    value: "View_Dept_Salaries_Combined"
+                },
+                {
+                    name: "View All Roles",
+                    value: "View_All_Roles"
+                },
+                {
+                    name: "View All Employees",
+                    value: "View_All_Emp"
+                },
+                {
+                    name: "View Employees By Manager",
+                    value: "View_Emp_By_Mgr"
+                },
+                {
+                    name: "Update Employee Roles",
+                    value: "Updated_Emp_Roles"
+                },
+                {
+                    name: "Update Employee Manager",
+                    value: "Update_Emp_Mgr"
+                },
+                {
+                    name: "Delete Departement",
+                    value: "Delete_Dept"
+                },
+                {
+                    name: "Delete Role",
+                    value: "Delete_Role"
+                },
+                {
+                    name: "Delete Employee",
+                    value: "Delete_Emp"
+                },
+                {
+                    name: "Exit",
+                    value: "exit"
+                }
+            ]
+        }
+
+    ]).then(answers => {
+        console.table(answers)
+    })
+}
