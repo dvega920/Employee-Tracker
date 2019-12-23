@@ -1,11 +1,13 @@
 //Require packages and assign to variables
 const inquirer = require("inquirer");
 const db = require("./db");
-require("console.table");
+const cTable = require("console.table");
 
 start();
 
 async function start() {
+
+    //assigns user choice to choice variable. returns a promise. 
     const { choice } = await inquirer.prompt([
         {
             name: "choice",
@@ -30,6 +32,12 @@ async function start() {
         }
 
     ])
+
+    /* 
+    if statements check for user input and runs the function depending on the choice the user made. Only got view all employees to run.
+    still need to create addt'l functions in ./db/index.js file.
+    */
+
     if (choice === "Add Department") {
         //addDepartment()
     }
@@ -49,7 +57,7 @@ async function start() {
         // viewAllRoles()
     }
     else if (choice === "View All Employees")
-        return viewEmployees();
+        return viewEmployees(); // returns a table with all employee data.
 
     else if (choice === "View Employees By Manager") {
         // viewEmployeesByManager()
@@ -70,15 +78,27 @@ async function start() {
         // deleteEmployee()
     }
     else if (choice === "Exit") {
-        // exit()
+        exit()
+
     }
 }
 
+//promisified connection.query waiting for response from database being queried in ./db/index.js dir queryAllEmployees()
 async function viewEmployees() {
-    const employees = await db.findAllEmployees();
+    const employees = await db.queryAllEmployees();
 
+    //new line tag
     console.log("\n");
+
+    //prints result(s) in a table format in the CLI. 
     console.table(employees);
 
+    //restarts function after results print out to select additional queries.
     start();
+}
+
+//exits the app sends user message and ends connection. 
+function exit() {
+    const quit = db.quit();
+    return quit;
 }
