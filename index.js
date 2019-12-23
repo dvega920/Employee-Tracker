@@ -1,10 +1,12 @@
 //Require packages and assign to variables
-const inquirer = require('inquirer');
+const inquirer = require("inquirer");
+const db = require("./db");
+require("console.table");
 
 start();
 
-function start() {
-    inquirer.prompt([
+async function start() {
+    const { choice } = await inquirer.prompt([
         {
             name: "choice",
             type: "list",
@@ -18,7 +20,7 @@ function start() {
                 "View All Roles",
                 "View All Employees",
                 "View Employees By Manager",
-                "Update Employee Roles",
+                "Update Employee Role",
                 "Update Employee Manager",
                 "Delete Departement",
                 "Delete Role",
@@ -27,53 +29,56 @@ function start() {
             ]
         }
 
-    ]).then(answer => {
-        if (answer.choice === "Add Department") {
-            // console.log("You selected Add Employee");  Used to test functionality. replace with addDept();
-        }
-        else if (answer.choice === "") {
-            // addDept()
-        }
-        else if (answer.choice === "") {
-            // addRole()
-        }
-        else if (answer.choice === "") {
-            // addEmployee()
-        }
-        else if (answer.choice === "") {
-            // viewAllDept()
-        }
-        else if (answer.choice === "") {
-            // viewDeptSalariesCombined()
-        }
-        else if (answer.choice === "") {
-            // viewAllRoles()
-        }
-        else if (answer.choice === "") {
-            // viewAllEmployees()
-        }
-        else if (answer.choice === "") {
-            // viewEmployeesByManager()
-        }
-        else if (answer.choice === "") {
-            // updateEmployeeRoles()
-        }
-        else if (answer.choice === "") {
-            // updateEmployeeManager()
-        }
-        else if (answer.choice === "") {
-            // deleteDept()
-        }
-        else if (answer.choice === "") {
-            // deleteRole()
-        }
-        else if (answer.choice === "") {
-            // deleteEmployee()
-        }
-        else if (answer.choice === "") {
-            // exit()
-        }
+    ])
+    if (choice === "Add Department") {
+        //addDepartment()
+    }
+    else if (choice === "Add Role") {
+        // addRole()
+    }
+    else if (choice === "Add Employee") {
+        // addEmployee()
+    }
+    else if (choice === "View All Departments") {
+        // viewAllDepts()
+    }
+    else if (choice === "View All Department Salaries (Combined)") {
+        // viewDeptSalariesCombined()
+    }
+    else if (choice === "View All Roles") {
+        // viewAllRoles()
+    }
+    else if (choice === "View All Employees")
+        return viewEmployees();
 
+    else if (choice === "View Employees By Manager") {
+        // viewEmployeesByManager()
+    }
+    else if (choice === "Update Employee Role") {
+        // updateEmployeeRole()
+    }
+    else if (choice === "Update Employee Manager") {
+        // updateEmployeeManager()
+    }
+    else if (choice === "Delete Department") {
+        // deleteDept()
+    }
+    else if (choice === "Delete Role") {
+        // deleteRole()
+    }
+    else if (choice === "Delete Employee") {
+        // deleteEmployee()
+    }
+    else if (choice === "Exit") {
+        // exit()
+    }
+}
 
-    })
+async function viewEmployees() {
+    const employees = await db.findAllEmployees();
+
+    console.log("\n");
+    console.table(employees);
+
+    start();
 }
